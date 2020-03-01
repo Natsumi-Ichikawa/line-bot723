@@ -67,14 +67,12 @@ class LinebotController < ApplicationController
               if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
                 word =
                   ["雨だけど元気出していこうね！",
-                   "雨に負けずファイト！！",
-                   "雨だけどああたの明るさでみんなを元気にしてあげて(^^)"].sample
+                   "雨に負けずファイト！！"].sample
                 push =
                   "今日の天気？\n今日は雨が降りそうだから傘があった方が安心だよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word}"
               else
                 word =
                   ["天気もいいから一駅歩いてみるのはどう？(^^)",
-                   "今日会う人のいいところを見つけて是非その人に教えてあげて(^^)",
                    "素晴らしい一日になりますように(^^)",
                    "雨が降っちゃったらごめんね(><)"].sample
                 push =
