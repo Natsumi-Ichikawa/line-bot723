@@ -61,7 +61,7 @@ class LinebotController < ApplicationController
               #ラッキーアイテムの追加
             　luckyitems = ["ラーメン","帽子","チョコレート","枕","お風呂"].sample
               push =
-                "こんにちは。\n声をかけてくれてありがとう！\n今日のラッキーアイテムは#{luckyitems}だよ！"
+                "こんにちは。\n声をかけてくれてありがとう！"
             else
               per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
               per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
