@@ -59,9 +59,9 @@ class LinebotController < ApplicationController
                 "ありがとう！！！\n優しい言葉をかけてくれるあなたはとても素敵です(^^)"
             when /.*(こんにちは|こんばんは|初めまして|はじめまして|おはよう).*/
               #ラッキーアイテムの追加
-            　luckyitems = ["ラーメン","帽子","チョコレート","枕","お風呂"].sample
+            　word = ["ラーメン","帽子","チョコレート","枕","お風呂"].sample
               push =
-                "こんにちは。\n声をかけてくれてありがとう！"
+                "こんにちは。\n声をかけてくれてありがとう！ \n今日のラッキーアイテムは #{word} だよ！"
             else
               per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
               per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
