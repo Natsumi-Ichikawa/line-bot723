@@ -29,7 +29,6 @@ task :update_feed => :environment do
     word1 =
       ["いい朝だね！",
        "今日もよく眠れた？",
-       "二日酔い大丈夫？",
        "早起きしてえらいね！",
        "いつもより起きるのちょっと遅いんじゃない？"].sample
     word2 =
@@ -38,6 +37,11 @@ task :update_feed => :environment do
        "雨に負けずに今日も頑張ってね(^^)",
        "今日も一日楽しんでいこうね(^^)",
        "楽しいことがありますように(^^)"].sample
+    #ラッキーアイテムの追加
+    luckyitems = ["ラーメン","帽子","チョコレート","枕","お風呂","メガネ","犬",
+    "ねこ","しりとり","クリームシチュー","冷やし中華","カキフライ","リュック","大福",
+    "瞬足","埼玉","流体力学","ラズパイ","しいたけ","群馬","コップ","靴下","ストレッチポール","ウエハース"].sample
+
     # 降水確率によってメッセージを変更する閾値の設定
     mid_per = 50
     if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
@@ -47,7 +51,7 @@ task :update_feed => :environment do
     end
     # 発信するメッセージの設定
     push =
-      "#{word1}\n#{word3}\n降水確率はこんな感じだよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word2}"
+      "#{word1}\n#{word3}\n降水確率はこんな感じだよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n今日のラッキーアイテムは#{luckyitems}だよ！\n#{word2}"
     # メッセージの発信先idを配列で渡す必要があるため、userテーブルよりpluck関数を使ってidを配列で取得
     user_ids = User.all.pluck(:line_id)
     message = {
