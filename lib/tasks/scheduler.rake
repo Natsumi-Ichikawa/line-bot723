@@ -26,10 +26,10 @@ task :update_feed => :environment do
   per18to24 = doc.elements[xpath + 'period[4]'].text
   # メッセージを発信する降水確率の下限値の設定
   min_per = 20
-  d = Date.today
-  #if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-  word0 = %w(日 月 火 水 木 金 土)[d.wday]
-  word1 = %w(ごみ出しなし　ミックスペーパー　段ボール　燃えるごみ　プラごみ　びんかんペット電池　燃えるごみ)[d.wday]
+  d = Date.today.wday
+    word0 = ["日","月","火","水","木","金","土"]
+    word1 = ["ごみ出しなし","ミックスペーパー","段ボール","燃えるごみ","プラごみ","びんかんペット電池","燃えるごみ"]
+    word4 = [" "," ","今日はもとまちユニオンでアイスが安いよ。","今日はもとまちユニオンで卵が100円だよ。"," "," "," "]
   
   word2 =
       ["気をつけて行ってきてね(^^)",
@@ -42,13 +42,6 @@ task :update_feed => :environment do
     "ねこ","しりとり","クリームシチュー","冷やし中華","カキフライ","リュック","大福",
     "瞬足","埼玉","流体力学","ラズパイ","しいたけ","群馬","コップ","靴下","ストレッチポール","ウエハース"].sample
 
-  if d.wday = 2
-    word4 = "今日はもとまちユニオンでアイスが安いよ"
-  elsif d.wday = 3
-    word4 = "今日はもとまちユニオンで卵が100円だよ"
-  else
-    word4 = " "
-
     # 降水確率によってメッセージを変更する閾値の設定
     mid_per = 50
     if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
@@ -60,8 +53,8 @@ task :update_feed => :environment do
     end
     # 発信するメッセージの設定
     push =
-      "おはよう！今日は#{word0}曜日、#{word1}の日だよ。\n#{word3}\n降水確率はこんな感じだよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％
-      \n#{word4}\n今日のラッキーアイテムは#{luckyitems}だよ！\n#{word2}"
+      "おはよう！今日は#{word0[d]}曜日、#{word1[d]}の日だよ。\n#{word3}\n降水確率はこんな感じだよ。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％
+      \n#{word4[d]}\n今日のラッキーアイテムは#{luckyitems}だよ！\n#{word2}"
     # メッセージの発信先idを配列で渡す必要があるため、userテーブルよりpluck関数を使ってidを配列で取得
     user_ids = User.all.pluck(:line_id)
     message = {
