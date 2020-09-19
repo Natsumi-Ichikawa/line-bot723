@@ -62,9 +62,9 @@ class LinebotController < ApplicationController
               d = Date.today
               word0 = %w(日 月 火 水 木 金 土)[d.wday]
               #word1 = %w(ごみ出しなし　ミックスペーパー　段ボール　燃えるごみ　プラごみ　びんかんペット電池　燃えるごみ)[d.wday]
-              if d.wday = 2
+              if d.wday == 2
                 word4 = "今日はもとまちユニオンでアイスが安いよ"
-              elsif d.wday = 3
+              elsif d.wday == 3
                 word4 = "今日はもとまちユニオンで卵が100円だよ"
               else
                 word4 = " "
