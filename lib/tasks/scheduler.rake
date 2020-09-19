@@ -14,7 +14,7 @@ task :update_feed => :environment do
   }
 
   # 使用したxmlデータ（毎日朝6時更新）：以下URLを入力すれば見ることができます。
-  url  = "https://www.drk7.jp/weather/xml/14.xml"　#神奈川は14　東京は13
+  url  = "https://www.drk7.jp/weather/xml/14.xml"
   # xmlデータをパース（利用しやすいように整形）
   xml  = open( url ).read.toutf8
   doc = REXML::Document.new(xml)
