@@ -61,13 +61,18 @@ class LinebotController < ApplicationController
             when /.*(こんにちは|こんばんは|初めまして|はじめまして|おはよう).*/
               d = Date.today
               word0 = %w(日 月 火 水 木 金 土)[d.wday]
-              word1 = %w(ごみ出しなし　ミックスペーパー　段ボール　燃えるごみ　プラごみ　びんかんペット電池　燃えるごみ)[d.wday]
-    
+              #word1 = %w(ごみ出しなし　ミックスペーパー　段ボール　燃えるごみ　プラごみ　びんかんペット電池　燃えるごみ)[d.wday]
+              if d.wday = 2
+                word4 = "今日はもとまちユニオンでアイスが安いよ"
+              elsif d.wday = 3
+                word4 = "今日はもとまちユニオンで卵が100円だよ"
+              else
+                word4 = " "
               luckyitems = ["ラーメン","帽子","チョコレート","枕","お風呂","メガネ","犬",
               "ねこ","しりとり","クリームシチュー","冷やし中華","カキフライ","リュック","大福",
               "瞬足","埼玉","流体力学","ラズパイ","しいたけ","群馬","コップ","靴下","ストレッチポール","ウエハース"].sample
               push =
-                "こんにちは。\n声をかけてくれてありがとう！\n今日は#{word0}曜日、#{word1}の日だよ。#{word4}ラッキーアイテムは#{luckyitems}だよ！"
+                "こんにちは。\n声をかけてくれてありがとう！\n今日は#{word0}曜日。#{word4}ラッキーアイテムは#{luckyitems}だよ！"
             else
               per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
               per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
