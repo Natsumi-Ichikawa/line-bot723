@@ -3,6 +3,7 @@ class LinebotController < ApplicationController
     require 'open-uri'
     require 'kconv'
     require 'rexml/document'
+    require 'date'
   
     # callbackアクションのCSRFトークン認証を無効
     protect_from_forgery :except => [:callback]
@@ -58,11 +59,13 @@ class LinebotController < ApplicationController
               push =
                 "ありがとう！"
             when /.*(こんにちは|こんばんは|初めまして|はじめまして|おはよう).*/
+              d = Date.today
+              word0 = %w(日 月 火 水 木 金 土)[d.wday]
               luckyitems = ["ラーメン","帽子","チョコレート","枕","お風呂","メガネ","犬",
               "ねこ","しりとり","クリームシチュー","冷やし中華","カキフライ","リュック","大福",
               "瞬足","埼玉","流体力学","ラズパイ","しいたけ","群馬","コップ","靴下","ストレッチポール","ウエハース"].sample
               push =
-                "こんにちは。\n声をかけてくれてありがとう！\n今日のラッキーアイテムは#{luckyitems}だよ！"
+                "こんにちは。\n声をかけてくれてありがとう！\n今日は#{word0}曜日、ラッキーアイテムは#{luckyitems}だよ！"
             else
               per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
               per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
