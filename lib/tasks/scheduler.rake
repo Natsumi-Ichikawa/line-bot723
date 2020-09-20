@@ -18,7 +18,7 @@ task :update_feed => :environment do
   # xmlデータをパース（利用しやすいように整形）
   xml  = open( url ).read.toutf8
   doc = REXML::Document.new(xml)
-  # パスの共通部分を変数化（area[1]は「東部」を指定している）
+  # パスの共通部分を変数化（area[4]は「東京地方」を指定している）
   xpath = 'weatherforecast/pref/area[4]/info/rainfallchance/'
   # 6時〜12時の降水確率（以下同様）
   per06to12 = doc.elements[xpath + 'period[2]'].text
@@ -44,7 +44,7 @@ task :update_feed => :environment do
 
     # 降水確率によってメッセージを変更する閾値の設定
     mid_per = 50
-    if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
+    if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per 
       word3 = "今日は雨が降りそうだから傘を忘れないでね！"
     elsif　per06to12.to_i <= min_per && per12to18.to_i <= min_per && per18to24.to_i <= min_per
       word3 = "今日は雨は降らないよ。洗濯物を干そう！"
