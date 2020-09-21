@@ -70,8 +70,7 @@ class LinebotController < ApplicationController
             "ねこ","しりとり","クリームシチュー","冷やし中華","カキフライ","リュック","大福",
             "瞬足","埼玉","流体力学","ラズパイ","しいたけ","群馬","コップ","靴下","ストレッチポール","ウエハース"].sample
             push =
-              "こんにちは。\n声をかけてくれてありがとう！\n今日は#{word0[d]}曜日、#{word1[d]}の日だよ。#{word4[d]}　\nラッキーアイテムは#{luckyitems}だよ！"
-              "こんにちは。\n今日は#{word0[d]}曜日、#{word1[d]}の日だよ。#{word4[d]}\nラッキーアイテムは#{luckyitems}だよ！"
+              "こんにちは。\n今日は#{word0[d]}曜日、#{word1[d]}の日だよ。#{word4[d]}　\nラッキーアイテムは#{luckyitems}だよ！"
           else
             per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
             per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
