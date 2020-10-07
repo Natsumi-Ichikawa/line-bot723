@@ -22,7 +22,6 @@
     per12to18 = doc.elements[xpath + 'period[3]'].text
     per18to24 = doc.elements[xpath + 'period[4]'].text
     # メッセージを発信する降水確率の下限値の設定
-    min_per = 20
     d = Date.today.wday
     word0 = ["日","月","火","水","木","金","土"]
     word1 = ["ごみ出しなし","ミックスペーパー","段ボール","燃えるごみ","プラごみ","びんかんペット電池","燃えるごみ"]
@@ -42,6 +41,7 @@
       "瞬足","埼玉","流体力学","ラズパイ","しいたけ","群馬","コップ","靴下","ストレッチポール","ウエハース"].sample
   
       # 降水確率によってメッセージを変更する閾値の設定
+      min_per = 20
       mid_per = 50
       if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per 
         word3 = "今日は雨が降りそうだから傘を忘れないでね。"
